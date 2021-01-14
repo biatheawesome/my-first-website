@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from sorl.thumbnail import ImageField
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
@@ -8,6 +9,7 @@ class Post(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
+    image = ImageField(upload_to='images/', blank=True, null=True)
 
 def publish(self):
     self.published_date = timezone.now()
